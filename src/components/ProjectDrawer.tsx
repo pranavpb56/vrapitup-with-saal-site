@@ -7,7 +7,7 @@ import { EASE, EASE_IO } from "@/lib/hooks";
 import { Icon, RollText } from "@/components/ui";
 
 const SERVICES = ["Website", "Posters & Visuals", "Video Ads", "Full upgrade"];
-const BUDGETS = ["< $3k", "$3k – 8k", "$8k – 15k", "$15k +"];
+const BUDGETS = ["< ₹25k", "₹25k – ₹75k", "₹75k – ₹1.5L", "₹1.5L +"];
 const TIMELINES = ["ASAP", "1–2 months", "Flexible"];
 
 function presetToService(preset: string) {
@@ -203,7 +203,7 @@ export function ProjectDrawer() {
     if (errors[k]) setErrors((e) => ({ ...e, [k]: "" }));
   };
 
-  const submit = (e: FormEvent) => {
+  const submit = async (e: FormEvent) => {
     e.preventDefault();
     const errs: Record<string, string> = {};
     if (!form.name.trim()) errs.name = "Please tell us your name";
@@ -296,6 +296,12 @@ export function ProjectDrawer() {
                   </div>
                   <Input className="mt-8" label="Company / current website (optional)" value={form.company} onChange={set("company")} />
                   <Input className="mt-8" label="What would you like to upgrade?" value={form.message} onChange={set("message")} multiline />
+
+                  {errors.submit && (
+                    <p className="mt-6 text-sm text-[#ff8a6b]" role="alert">
+                      {errors.submit}
+                    </p>
+                  )}
 
                   <button
                     type="submit"

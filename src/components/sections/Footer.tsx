@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { useApp } from "@/lib/context";
-import { EMAIL, SOCIALS } from "@/lib/data";
+import { EMAIL, PHONES, SOCIALS } from "@/lib/data";
 import { EASE } from "@/lib/hooks";
 import { Logo } from "@/components/Nav";
 
@@ -89,7 +89,18 @@ export function Footer() {
             <a href={`mailto:${EMAIL}`} className="mt-5 block text-[15px] text-bone/80 transition-colors hover:text-volt">
               {EMAIL}
             </a>
-            <p className="mt-2.5 text-[15px] text-bone/50">Remote-first · Worldwide</p>
+            <div className="mt-4 space-y-1.5">
+              {PHONES.map((phone) => (
+                <a
+                  key={phone}
+                  href={`tel:+91${phone}`}
+                  className="block text-[15px] text-bone/70 transition-colors hover:text-volt"
+                >
+                  +91 {phone}
+                </a>
+              ))}
+            </div>
+            <p className="mt-3 text-[15px] text-bone/50">Remote-first · Worldwide</p>
             <p className="mt-6 font-mono text-[11px] uppercase tracking-[0.14em] text-bone/40">
               Local time <span className="text-bone/70">{time}</span>
             </p>

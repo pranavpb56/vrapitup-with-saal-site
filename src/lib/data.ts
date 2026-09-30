@@ -16,6 +16,7 @@ export const VIDEO = {
 };
 
 export const EMAIL = "vrapitupp@gmail.com";
+export const PHONES = ["9989906804", "8519895649"];
 
 export const SOCIALS = [
   { label: "Instagram", href: "https://instagram.com" },
