@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Saal — Furniture made for the way you live</title>
+<meta name="description" content="Saal designs and builds furniture for modern Indian homes. Sofas, beds, dining, storage and made-to-measure pieces.">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F2EFE9; --bg2:#E3DDD1; --ink:#26231F; --muted:#6C655A; --line:rgba(38,35,31,.2);
+  --olive:#22231E; --walnut:#3A2B21; --sage:#8E9479; --brass:#B08D57; --onDark:#EFEAE0;
+  --serif:'Bodoni Moda','Bodoni 72','Didot',Georgia,'Times New Roman',serif;
+  --sans:'Instrument Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --pad:clamp(1.25rem,5vw,5rem);
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#171512;--bg2:#1f1d19;--ink:#ECE7DC;--muted:#a59e91;--line:rgba(236,231,220,.2)}
+}
+:root[data-theme="dark"]{--bg:#171512;--bg2:#1f1d19;--ink:#ECE7DC;--muted:#a59e91;--line:rgba(236,231,220,.2)}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;height:100%}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:1.0625rem;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,h4,p,figure,ul{margin:0;padding:0}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.serif{font-family:var(--serif)}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.015em}
+h2{font-size:clamp(2.4rem,5.4vw,5rem);line-height:1.02}
+.wrap{padding-inline:var(--pad);max-width:1720px;margin-inline:auto}
+section{position:relative}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:3.25rem;padding:.85rem 1.9rem;font-size:.95rem;font-weight:500;letter-spacing:.01em;border:1px solid transparent;transition:background .35s var(--ease),color .35s var(--ease),border-color .35s var(--ease)}
+.btn-light{background:var(--onDark);color:#1d1a16}
+.btn-light:hover{background:var(--brass);color:#1d1a16}
+.btn-ghost{border-color:rgba(239,234,224,.55);color:var(--onDark)}
+.btn-ghost:hover{background:var(--onDark);color:#1d1a16}
+.btn-dark{background:var(--ink);color:var(--bg)}
+.btn-dark:hover{background:var(--brass);color:#1d1a16}
+.btn-line{border-color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--bg)}
+.tlink{display:inline-block;font-weight:500;font-size:.95rem;background:linear-gradient(currentColor,currentColor) 0 100%/100% 1px no-repeat;padding-bottom:3px;transition:background-size .4s var(--ease),color .3s}
+.tlink:hover{background-size:0 1px;background-position:100% 100%;color:var(--brass)}
+
+/* Nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:env(safe-area-inset-top,0px);color:var(--onDark);transition:background .4s,color .4s,box-shadow .4s}
+.nav.solid{background:var(--bg);color:var(--ink);box-shadow:0 1px 0 var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:4.75rem;padding-inline:var(--pad);max-width:1720px;margin-inline:auto}
+.brand{font-family:var(--serif);font-size:2rem;letter-spacing:.02em;line-height:1}
+.nav ul{display:flex;gap:2.4rem;font-size:.95rem}
+.nav ul a{padding:.4rem 0;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .4s var(--ease)}
+.nav ul a:hover{background-size:100% 1px}
+.nav .btn{min-height:2.75rem;padding:.55rem 1.3rem;font-size:.9rem}
+.nav:not(.solid) .btn{border-color:rgba(239,234,224,.6);color:var(--onDark)}
+.nav:not(.solid) .btn:hover{background:var(--onDark);color:#1d1a16}
+.nav.solid .btn{background:var(--ink);color:var(--bg)}
+.burger{display:none;background:none;border:0;width:2.75rem;height:2.75rem;position:relative}
+.burger i{position:absolute;left:.6rem;right:.6rem;height:1.5px;background:currentColor;transition:transform .35s var(--ease),top .35s var(--ease)}
+.burger i:nth-child(1){top:1.1rem}.burger i:nth-child(2){top:1.65rem}
+.menu-open .burger i:nth-child(1){top:1.375rem;transform:rotate(45deg)}
+.menu-open .burger i:nth-child(2){top:1.375rem;transform:rotate(-45deg)}
+.sheet{position:fixed;inset:0;z-index:40;background:var(--olive);color:var(--onDark);display:flex;flex-direction:column;justify-content:center;gap:1.1rem;padding:6rem var(--pad) 3rem;visibility:hidden;opacity:0;transition:opacity .4s,visibility .4s}
+.menu-open .sheet{visibility:visible;opacity:1}
+.menu-open .nav{color:var(--onDark);background:transparent;box-shadow:none}
+.sheet a{font-family:var(--serif);font-size:2.6rem;line-height:1.15}
+@media(max-width:900px){.nav ul,.nav .btn{display:none}.burger{display:block}}
+
+/* Scenes */
+.img svg{width:100%;height:100%}
+.frame{position:relative;overflow:hidden;background:var(--bg2)}
+.frame .img{position:absolute;inset:-7% 0}
+.fa{fill:var(--a)}.fb{fill:var(--b)}.fc{fill:var(--c)}.fd{fill:var(--d)}.sc{stroke:var(--c)}
+.js .frame.rv .img>svg{clip-path:inset(0 0 100% 0);transform:scale(1.16);transition:clip-path 1.25s cubic-bezier(.7,0,.2,1),transform 1.9s var(--ease)}
+.js .frame.rv.in .img>svg{clip-path:inset(0 0 0 0)}
+.js .frame.rv.in .img>svg{transform:scale(1)}
+
+/* Hero */
+.hero{height:100vh;height:100svh;min-height:600px;overflow:hidden;background:#171310;color:var(--onDark)}
+.hero-scene{position:absolute;inset:0}
+.hero-scene svg{width:100%;height:100%;overflow:visible;transform-origin:62% 62%}
+.js .hero-scene svg{transform:scale(1.14);transition:transform 4s var(--ease)}
+.js .loaded .hero-scene svg{transform:scale(1)}
+.hero-veil{position:absolute;inset:0;background:#120e0b;transition:opacity 2s ease .1s;pointer-events:none}
+.loaded .hero-veil{opacity:0}
+.hero-shade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(18,14,11,.72) 0%,rgba(18,14,11,.35) 42%,rgba(18,14,11,0) 68%),linear-gradient(0deg,rgba(18,14,11,.6),rgba(18,14,11,0) 45%)}
+.hero-copy{position:absolute;left:var(--pad);right:var(--pad);bottom:clamp(2.5rem,9vh,6rem);max-width:60rem}
+.hero h1{font-size:clamp(3.2rem,7.4vw,7.6rem);line-height:.94;letter-spacing:-.025em;margin-bottom:1.75rem}
+.line{display:block;overflow:hidden;padding-bottom:.08em}
+.line>span{display:block}
+.js .line>span{transform:translateY(108%);transition:transform 1.3s var(--ease)}
+.loaded .line>span{transform:none}
+.line:nth-child(1)>span{transition-delay:.9s}.line:nth-child(2)>span{transition-delay:1.05s}.line:nth-child(3)>span{transition-delay:1.2s}
+.lede{max-width:31rem;font-size:1.125rem;color:rgba(239,234,224,.86);margin-bottom:2.25rem}
+.js .lede,.js .cta-row{opacity:0;transition:opacity 1.2s ease 1.9s}
+.loaded .lede,.loaded .cta-row{opacity:1}
+.cta-row{display:flex;flex-wrap:wrap;gap:.9rem}
+.glow{opacity:.95}
+.js .glow{opacity:0;transition:opacity 2.4s ease 1.3s}
+.js .loaded .glow{opacity:.95}
+.hot{cursor:pointer;outline:none}
+.hot .pulse{transform-box:fill-box;transform-origin:center;animation:pulse 2.8s ease-out infinite}
+.hot text{opacity:0;transition:opacity .3s;font-family:var(--sans);font-size:26px;fill:#1d1a16;pointer-events:none}
+.hot .tag{opacity:0;transition:opacity .3s}
+.hot:hover text,.hot:hover .tag,.hot:focus-visible text,.hot:focus-visible .tag{opacity:1}
+@keyframes pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(3);opacity:0}}
+@media(max-width:700px){.hero-shade{background:linear-gradient(0deg,rgba(18,14,11,.85),rgba(18,14,11,.15) 65%)}.hot text,.hot .tag{display:none}}
+
+/* Intro statement */
+.intro{padding-block:clamp(6rem,14vw,13rem) clamp(4rem,8vw,8rem)}
+.intro-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:2rem}
+.intro h2{grid-column:1/9;font-size:clamp(2.6rem,6.2vw,6rem);line-height:1.02}
+.intro p{grid-column:9/13;align-self:end;color:var(--muted);max-width:26rem}
+@media(max-width:900px){.intro h2,.intro p{grid-column:1/-1}}
+
+/* Rooms */
+.rooms{padding-bottom:clamp(5rem,10vw,10rem)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:2rem;margin-bottom:clamp(2rem,4vw,4rem)}
+.sec-head p{color:var(--muted);max-width:24rem}
+.cats{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(2.5rem,5vw,4.5rem) clamp(1rem,2vw,2rem)}
+.cat{display:block}
+.cat:nth-child(1){grid-column:span 7}.cat:nth-child(2){grid-column:span 5;margin-top:clamp(0rem,8vw,7rem)}
+.cat:nth-child(3){grid-column:span 4}.cat:nth-child(4){grid-column:span 4;margin-top:clamp(0rem,5vw,4.5rem)}.cat:nth-child(5){grid-column:span 4}
+.cat:nth-child(6){grid-column:span 5}.cat:nth-child(7){grid-column:span 3;margin-top:clamp(0rem,7vw,6rem)}.cat:nth-child(8){grid-column:span 4}
+.cat:nth-child(1) .frame{aspect-ratio:7/5}.cat:nth-child(2) .frame{aspect-ratio:1/1}
+.cat:nth-child(3) .frame,.cat:nth-child(4) .frame,.cat:nth-child(5) .frame{aspect-ratio:4/5}
+.cat:nth-child(6) .frame{aspect-ratio:1/1}.cat:nth-child(7) .frame{aspect-ratio:3/4}.cat:nth-child(8) .frame{aspect-ratio:4/5}
+.cat .img>svg{transition:transform 1.2s var(--ease)}
+.js .cat .frame.rv.in .img>svg{transition:transform 1.2s var(--ease)}
+.cat:hover .frame.in .img>svg{transform:scale(1.07)}
+.cap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding-top:1rem}
+.cap h3{font-size:clamp(1.6rem,2.4vw,2.3rem);line-height:1.1;background:linear-gradient(var(--brass),var(--brass)) 0 100%/0 1px no-repeat;transition:background-size .6s var(--ease);padding-bottom:.15em}
+.cat:hover .cap h3{background-size:100% 1px}
+.cap span{font-size:.9rem;color:var(--muted);transition:transform .5s var(--ease),color .3s}
+.cat:hover .cap span{transform:translateX(-.4rem);color:var(--ink)}
+@media(max-width:900px){.cats{grid-template-columns:repeat(2,1fr)}.cat:nth-child(n){grid-column:span 1;margin-top:0}.cat:nth-child(1){grid-column:1/-1}.cat:nth-child(n) .frame{aspect-ratio:4/5}.cat:nth-child(1) .frame{aspect-ratio:4/3}.sec-head{flex-direction:column;align-items:start}}
+@media(max-width:520px){.cap span{display:none}.cap h3{font-size:1.35rem}}
+
+/* Collection */
+.collection{background:var(--bg2);padding-block:clamp(5rem,10vw,10rem)}
+.prods{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(4rem,8vw,8rem) clamp(1.25rem,3vw,3rem)}
+.prod{display:block}
+.prod:nth-child(1){grid-column:1/8}.prod:nth-child(2){grid-column:9/13;margin-top:clamp(0rem,12vw,12rem)}
+.prod:nth-child(3){grid-column:2/6}.prod:nth-child(4){grid-column:7/13;margin-top:clamp(0rem,7vw,7rem)}
+.prod:nth-child(5){grid-column:1/7}.prod:nth-child(6){grid-column:8/12;margin-top:clamp(0rem,10vw,10rem)}
+.prod:nth-child(1) .frame{aspect-ratio:7/6}.prod:nth-child(2) .frame{aspect-ratio:4/5}
+.prod:nth-child(3) .frame{aspect-ratio:4/5}.prod:nth-child(4) .frame{aspect-ratio:1/1}
+.prod:nth-child(5) .frame{aspect-ratio:6/5}.prod:nth-child(6) .frame{aspect-ratio:3/4}
+.prod .frame{cursor:pointer}
+.prod .img>svg{transition:transform 1.2s var(--ease)}
+.prod:hover .frame.in .img>svg{transform:scale(1.04)}
+.pmeta{display:grid;grid-template-columns:1fr auto;gap:.25rem 1.5rem;padding-top:1.4rem}
+.pmeta h3{font-size:clamp(1.7rem,2.6vw,2.5rem);line-height:1.1}
+.pmeta .price{font-weight:500;white-space:nowrap;padding-top:.5rem}
+.pmeta p{grid-column:1;color:var(--muted);max-width:28rem}
+.pmeta .tlink{grid-column:1;justify-self:start;margin-top:.9rem;background-color:transparent;border:0;padding-inline:0}
+@media(max-width:900px){.prods{grid-template-columns:1fr}.prod:nth-child(n){grid-column:1/-1;margin-top:0}.prod:nth-child(n) .frame{aspect-ratio:4/5}}
+
+/* Why */
+.why{padding-block:clamp(5rem,10vw,10rem)}
+.why-grid{display:grid;grid-template-columns:5fr 7fr;gap:clamp(2rem,6vw,7rem);align-items:start}
+.why-head{position:sticky;top:8rem}
+.why-head h2{margin-bottom:1.5rem}
+.why-head p{color:var(--muted);max-width:26rem}
+.pillars li{display:grid;grid-template-columns:1fr;gap:.5rem;padding-block:2.2rem;border-top:1px solid var(--line)}
+.pillars li:last-child{border-bottom:1px solid var(--line)}
+.pillars h3{font-size:clamp(1.8rem,2.8vw,2.6rem);line-height:1.1}
+.pillars p{color:var(--muted);max-width:32rem}
+.mats{display:flex;height:clamp(20rem,38vw,30rem);margin-top:clamp(4rem,8vw,8rem);gap:.5rem}
+.mat{flex:1;position:relative;overflow:hidden;transition:flex .8s var(--ease);cursor:default;display:flex;align-items:end;padding:1.1rem;color:#fff}
+.mat:hover,.mat:focus-visible{flex:3.2}
+.mat span{font-size:.92rem;font-weight:500;white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.mat.light{color:#26231F}.mat.light span{text-shadow:none}
+.m1{background:repeating-linear-gradient(92deg,rgba(0,0,0,.14) 0 2px,transparent 2px 9px,rgba(255,255,255,.06) 9px 11px,transparent 11px 19px),#7a5236}
+.m2{background:repeating-linear-gradient(88deg,rgba(0,0,0,.08) 0 1px,transparent 1px 12px,rgba(255,255,255,.1) 12px 14px,transparent 14px 26px),#b89a6c}
+.m3{background:repeating-linear-gradient(94deg,rgba(0,0,0,.2) 0 2px,transparent 2px 7px,rgba(255,255,255,.05) 7px 9px,transparent 9px 21px),#4a3628}
+.m4{background:repeating-linear-gradient(45deg,rgba(0,0,0,.22) 0 1.5px,transparent 1.5px 10px),repeating-linear-gradient(-45deg,rgba(0,0,0,.22) 0 1.5px,transparent 1.5px 10px),#c9a96f}
+.m5{background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.55) 0 2px,transparent 3px) 0 0/11px 11px,radial-gradient(circle at 70% 60%,rgba(0,0,0,.09) 0 2px,transparent 3px) 0 0/9px 9px,#e6dfd1}
+.m6{background:repeating-linear-gradient(0deg,rgba(0,0,0,.07) 0 1px,transparent 1px 4px),repeating-linear-gradient(90deg,rgba(255,255,255,.12) 0 1px,transparent 1px 5px),#8e9479}
+.m7{background:linear-gradient(105deg,rgba(255,255,255,.35) 0 8%,transparent 30%,rgba(255,255,255,.22) 55%,transparent 75%),#b08d57}
+@media(max-width:900px){.why-grid{grid-template-columns:1fr}.why-head{position:static}.mats{flex-wrap:wrap;height:auto}.mat{flex:1 1 30%;height:9rem}.mat:hover{flex:1 1 30%}}
+
+/* Custom */
+.custom{background:var(--olive);color:var(--onDark);padding-block:clamp(5rem,11vw,11rem);overflow:hidden}
+.custom-grid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(2rem,5vw,6rem);align-items:center}
+.custom h2{font-size:clamp(3rem,7.4vw,7.4rem);line-height:.98;margin-bottom:2rem}
+.custom-copy p{color:rgba(239,234,224,.78);max-width:28rem;margin-bottom:2rem}
+.aspects{display:grid;grid-template-columns:1fr 1fr;gap:0 2rem;margin-bottom:2.5rem;max-width:28rem}
+.aspects li{border-top:1px solid rgba(239,234,224,.22);padding-block:.8rem;font-size:.98rem}
+.conf{background:#2b2c26;padding:clamp(1rem,2vw,1.75rem)}
+.conf-view{aspect-ratio:16/11;overflow:hidden;background:#d9d2c5}
+.conf-view svg{width:100%;height:100%}
+.conf-ctl{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem 2rem;padding-top:1.5rem}
+.ctl label,.ctl .lab{display:flex;justify-content:space-between;font-size:.88rem;color:rgba(239,234,224,.7);margin-bottom:.6rem}
+.ctl output{color:var(--onDark);font-weight:500}
+.ctl.full{grid-column:1/-1}
+.opts{display:flex;flex-wrap:wrap;gap:.5rem}
+.opt{display:inline-flex;align-items:center;gap:.5rem;background:transparent;border:1px solid rgba(239,234,224,.28);padding:.45rem .8rem;font-size:.88rem;color:var(--onDark);transition:border-color .25s,background .25s}
+.opt:hover{border-color:rgba(239,234,224,.7)}
+.opt[aria-pressed="true"]{border-color:var(--brass);background:rgba(176,141,87,.16)}
+.opt i{width:.9rem;height:.9rem;display:block}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:1.5rem;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:1px;background:rgba(239,234,224,.5)}
+input[type=range]::-moz-range-track{height:1px;background:rgba(239,234,224,.5)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:1.05rem;height:1.05rem;background:var(--brass);border:0;margin-top:-.5rem}
+input[type=range]::-moz-range-thumb{width:1.05rem;height:1.05rem;background:var(--brass);border:0;border-radius:0}
+.conf-sum{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;border-top:1px solid rgba(239,234,224,.2);padding-top:1.25rem;font-size:.92rem;color:rgba(239,234,224,.75)}
+@media(max-width:900px){.custom-grid{grid-template-columns:1fr}.conf-ctl{grid-template-columns:1fr}}
+
+/* Showroom */
+.showroom{padding-block:clamp(5rem,10vw,10rem)}
+.show-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(1rem,2vw,2rem);align-items:start}
+.sh-a{grid-column:1/8;aspect-ratio:7/5}
+.sh-b{grid-column:8/13;aspect-ratio:4/5;margin-top:clamp(0rem,6vw,6rem)}
+.sh-c{grid-column:1/5;aspect-ratio:1/1;margin-top:clamp(0rem,-2vw,0rem)}
+.sh-info{grid-column:6/13;display:grid;grid-template-columns:1fr 1fr;gap:2.5rem clamp(1.5rem,3vw,3rem);padding-top:clamp(0rem,2vw,2rem)}
+.sh-info h2{grid-column:1/-1;font-size:clamp(2.4rem,4.6vw,4.4rem)}
+.sh-info h4{font-family:var(--sans);font-size:.9rem;font-weight:500;color:var(--muted);margin-bottom:.6rem}
+.sh-info address{font-style:normal}
+.hours{border-top:1px solid var(--line)}
+.hours li{display:flex;justify-content:space-between;gap:1rem;padding:.55rem 0;border-bottom:1px solid var(--line);font-size:.96rem}
+.hours li.today{font-weight:600}
+.hours li.today span:first-child::after{content:' (today)';font-weight:400;color:var(--muted)}
+.map{grid-column:1/-1;position:relative;aspect-ratio:16/7;min-height:16rem;margin-top:1rem;overflow:hidden;background:#e5dfd3}
+.map svg{width:100%;height:100%}
+.map .btn{position:absolute;left:1.25rem;bottom:1.25rem}
+@media(max-width:900px){.sh-a,.sh-b,.sh-c,.sh-info{grid-column:1/-1;margin-top:0}.sh-b,.sh-c{aspect-ratio:4/3}.sh-info{grid-template-columns:1fr}.map{aspect-ratio:4/3}}
+
+/* Reviews */
+.reviews{background:var(--bg2);padding-block:clamp(5rem,10vw,10rem)}
+.rv-grid{display:grid;grid-template-columns:7fr 5fr;gap:clamp(2.5rem,6vw,7rem);align-items:start}
+.lead blockquote{margin:0;font-family:var(--serif);font-size:clamp(1.7rem,3.1vw,3rem);line-height:1.22;letter-spacing:-.01em}
+.who{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem 1.25rem;margin-top:2rem;font-size:.95rem}
+.who b{font-weight:600}
+.who span{color:var(--muted)}
+.stars{display:inline-flex;gap:2px}
+.stars svg{width:1rem;height:1rem;fill:var(--brass)}
+.stars svg.off{fill:var(--line)}
+.rlist li{padding-block:1.75rem;border-top:1px solid var(--line)}
+.rlist li:last-child{border-bottom:1px solid var(--line)}
+.rlist p{margin:.75rem 0 1rem;max-width:34rem}
+.rlist .who{margin-top:0}
+@media(max-width:900px){.rv-grid{grid-template-columns:1fr}}
+
+/* Inspiration */
+.insta{padding-block:clamp(5rem,10vw,10rem)}
+.gal{columns:3;column-gap:clamp(.5rem,1vw,1rem)}
+.g{position:relative;display:block;break-inside:avoid;margin-bottom:clamp(.5rem,1vw,1rem);overflow:hidden}
+.g1{aspect-ratio:4/5}.g2{aspect-ratio:1/1}.g3{aspect-ratio:4/3}.g4{aspect-ratio:3/4}.g5{aspect-ratio:1/1}.g6{aspect-ratio:4/3}.g7{aspect-ratio:4/5}.g8{aspect-ratio:1/1}
+.g .frame,.g .img{position:absolute;inset:0}
+.g .frame .img{inset:-6% 0}
+.g .cp{position:absolute;left:0;right:0;bottom:0;padding:1.25rem;color:#fff;font-size:.9rem;background:linear-gradient(0deg,rgba(15,12,9,.78),rgba(15,12,9,0));opacity:0;transform:translateY(.6rem);transition:opacity .45s,transform .6s var(--ease);z-index:2}
+.g:hover .cp,.g:focus-visible .cp{opacity:1;transform:none}
+.g .img>svg{transition:transform 1.2s var(--ease)}
+.g:hover .frame.in .img>svg{transform:scale(1.06)}
+.insta .sec-head{align-items:end}
+@media(max-width:900px){.gal{columns:2}.g .cp{opacity:1;transform:none}}
+
+/* Final */
+.final{min-height:min(90vh,60rem);display:flex;align-items:center;overflow:hidden;background:#1a1612;color:var(--onDark)}
+.final .frame{position:absolute;inset:0}
+.final .frame .img{inset:-10% 0}
+.final .shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,12,9,.78),rgba(16,12,9,.3) 55%,rgba(16,12,9,.1))}
+.final .final-copy{position:relative;padding-block:6rem;max-width:calc(56rem + var(--pad));margin-left:max(0px,calc((100vw - 1720px)/2));margin-right:auto;width:100%}
+.final h2{font-size:clamp(3rem,7.6vw,7.6rem);line-height:.98;margin-bottom:1.5rem}
+.final p{max-width:30rem;color:rgba(239,234,224,.85);margin-bottom:2.25rem;font-size:1.125rem}
+@media(max-width:700px){.final .shade{background:linear-gradient(0deg,rgba(16,12,9,.85),rgba(16,12,9,.35))}}
+
+/* Footer */
+footer{background:var(--olive);color:var(--onDark);padding-block:4rem 2.5rem}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem}
+.foot .brand{font-size:2.4rem;margin-bottom:.8rem}
+.foot p,.foot li,.foot address{color:rgba(239,234,224,.68);font-size:.95rem;font-style:normal}
+.foot h4{font-family:var(--sans);font-size:.9rem;font-weight:500;margin-bottom:.9rem}
+.foot li{padding:.2rem 0}
+.foot a:hover{color:var(--brass)}
+.legal{margin-top:3.5rem;padding-top:1.5rem;border-top:1px solid rgba(239,234,224,.16);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.85rem;color:rgba(239,234,224,.5)}
+@media(max-width:800px){.foot{grid-template-columns:1fr 1fr}.foot>div:first-child{grid-column:1/-1}}
+
+/* Product dialog */
+dialog{border:0;padding:0;background:var(--bg);color:var(--ink);width:min(1080px,94vw);max-height:92vh;overflow:auto}
+dialog::backdrop{background:rgba(18,14,11,.72)}
+dialog[open]{animation:dlg .55s var(--ease)}
+@keyframes dlg{from{opacity:0;transform:translateY(1.5rem)}to{opacity:1;transform:none}}
+.dlg-grid{display:grid;grid-template-columns:1fr 1fr}
+.dlg-img{position:relative;min-height:32rem}
+.dlg-img .img{position:absolute;inset:0}
+.dlg-body{padding:clamp(1.5rem,4vw,3.5rem);display:flex;flex-direction:column;gap:1.25rem}
+.dlg-body h3{font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.05}
+.dlg-body dl{margin:0;border-top:1px solid var(--line)}
+.dlg-body dl div{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--line);font-size:.96rem}
+.dlg-body dt{color:var(--muted)}.dlg-body dd{margin:0;text-align:right}
+.dlg-price{font-family:var(--serif);font-size:1.8rem}
+.dlg-x{position:absolute;top:.75rem;right:.75rem;z-index:3;width:2.75rem;height:2.75rem;background:var(--bg);border:0;font-size:1.4rem;line-height:1}
+@media(max-width:800px){.dlg-grid{grid-template-columns:1fr}.dlg-img{min-height:20rem}}
+
+/* Curved image treatment */
+.frame,.hero-scene,.final .frame,.dlg-img{border-radius:clamp(12px,1.2vw,24px)}
+.scene-photo,.img>img{border-radius:inherit}
+.hero-scene{overflow:hidden}
+.hero-scene img{border-radius:inherit}
+/* Real photography layer */
+.scene-photo,.img>img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;transition:transform 1.2s var(--ease),filter .6s ease}
+.frame .img,.hero-scene,.final .frame .img{overflow:hidden}
+.frame .img{inset:0}
+.frame .img::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 34%,rgba(0,0,0,.12));mix-blend-mode:soft-light;pointer-events:none}
+.hero-scene img{position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;object-position:center 52%}
+.js .hero-scene img{transform:scale(1.08);transition:transform 4s var(--ease),filter 1.2s ease}
+.js .loaded .hero-scene img{transform:scale(1)}
+.cat:hover .frame.in .img>img,.prod:hover .frame.in .img>img,.g:hover .frame.in .img>img{transform:scale(1.06)}
+.final .frame .img>img{position:absolute;inset:-5%;width:110%;height:110%;object-fit:cover;object-position:center 52%}
+.dlg-img .img>img{width:100%;height:100%;object-fit:cover}
+.collection .sec-head{margin-bottom:1.5rem}
+.filterbar{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:clamp(2rem,4vw,4rem)}
+.filterbar button{border:1px solid var(--line);background:transparent;padding:.55rem .9rem;font-size:.88rem;transition:all .3s var(--ease)}
+.filterbar button:hover,.filterbar button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.prod[hidden]{display:none}
+.prod{transition:opacity .35s ease,transform .35s var(--ease)}
+.prod.is-hidden{opacity:0;transform:translateY(1rem)}
+@media(max-width:700px){.hero-scene img{object-position:62% 50%}}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .js .frame.rv .img>svg{clip-path:none;transform:none}
+  .js .line>span,.js .lede,.js .cta-row{transform:none;opacity:1}
+  .js .glow{opacity:.95}
+}
+</style>
+</head>
+<body>
+
+<!-- Shared SVG library -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<pattern id="flute" width="7" height="10" patternUnits="userSpaceOnUse"><rect width="3" height="10" fill="#000" opacity=".16"/><rect x="3" width="1" height="10" fill="#fff" opacity=".09"/></pattern>
+<pattern id="cane" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 4.5H9M4.5 0V9" stroke="#000" stroke-opacity=".28" stroke-width="1.2" fill="none"/><path d="M0 0H9M0 9H9" stroke="#fff" stroke-opacity=".12" stroke-width=".8" fill="none"/></pattern>
+<radialGradient id="glowg"><stop offset="0" stop-color="#FFD9A0" stop-opacity=".7"/><stop offset=".4" stop-color="#FFC77A" stop-opacity=".22"/><stop offset="1" stop-color="#FFC77A" stop-opacity="0"/></radialGradient>
+
+<symbol id="sofa" viewBox="0 0 400 170">
+<ellipse cx="200" cy="166" rx="192" ry="4" fill="#000" opacity=".24"/>
+<rect x="34" y="148" width="7" height="20" class="fc"/><rect x="359" y="148" width="7" height="20" class="fc"/>
+<rect x="18" y="18" width="364" height="116" rx="30" class="fa"/><rect x="18" y="18" width="364" height="116" rx="30" fill="#000" opacity=".14"/>
+<rect x="34" y="30" width="162" height="78" rx="20" class="fa"/><rect x="204" y="30" width="162" height="78" rx="20" class="fa"/>
+<rect x="34" y="30" width="162" height="78" rx="20" fill="#fff" opacity=".06"/><rect x="204" y="30" width="162" height="78" rx="20" fill="#fff" opacity=".06"/>
+<rect x="42" y="92" width="316" height="58" rx="14" class="fa"/><rect x="42" y="92" width="316" height="58" rx="14" fill="#000" opacity=".1"/>
+<rect x="48" y="80" width="148" height="50" rx="14" class="fb"/><rect x="204" y="80" width="148" height="50" rx="14" class="fb"/>
+<rect x="0" y="58" width="52" height="94" rx="24" class="fa"/><rect x="348" y="58" width="52" height="94" rx="24" class="fa"/>
+<rect x="6" y="62" width="40" height="22" rx="11" fill="#fff" opacity=".14"/><rect x="354" y="62" width="40" height="22" rx="11" fill="#fff" opacity=".14"/>
+<rect x="70" y="48" width="50" height="50" rx="13" class="fd" transform="rotate(-8 95 73)"/>
+<rect x="290" y="56" width="44" height="44" rx="12" class="fd" opacity=".75" transform="rotate(7 312 78)"/>
+</symbol>
+
+<symbol id="chair" viewBox="0 0 220 230">
+<ellipse cx="110" cy="226" rx="90" ry="4" fill="#000" opacity=".24"/>
+<path d="M60 168L44 226M160 168L176 226" stroke-width="7" stroke-linecap="round" fill="none" class="sc"/>
+<path d="M92 172L88 218M128 172L132 218" stroke-width="6" stroke-linecap="round" fill="none" class="sc" opacity=".65"/>
+<path d="M26 74Q26 8 110 8Q194 8 194 74L188 150H32Z" class="fa"/><path d="M26 74Q26 8 110 8Q194 8 194 74L188 150H32Z" fill="#000" opacity=".16"/>
+<path d="M50 84Q50 34 110 34Q170 34 170 84L166 136H54Z" class="fa"/><path d="M50 84Q50 34 110 34Q170 34 170 84L166 136H54Z" fill="#fff" opacity=".05"/>
+<rect x="30" y="126" width="160" height="46" rx="22" class="fb"/>
+<rect x="34" y="160" width="152" height="16" rx="8" class="fa"/><rect x="34" y="160" width="152" height="16" rx="8" fill="#000" opacity=".12"/>
+</symbol>
+
+<symbol id="tlamp" viewBox="0 0 50 90">
+<path d="M10 32H40L47 4H3Z" fill="#EFE6D2"/><path d="M10 32H40L47 4H3Z" fill="#000" opacity=".06"/>
+<rect x="23" y="32" width="4" height="42" class="fc"/><rect x="13" y="72" width="24" height="9" rx="3" class="fc"/>
+</symbol>
+
+<symbol id="dining" viewBox="0 0 520 250">
+<ellipse cx="260" cy="246" rx="252" ry="4" fill="#000" opacity=".22"/>
+<g class="fb"><rect x="44" y="52" width="96" height="88" rx="14"/><rect x="212" y="52" width="96" height="88" rx="14"/><rect x="380" y="52" width="96" height="88" rx="14"/></g>
+<g fill="#000" opacity=".12"><rect x="44" y="52" width="96" height="88" rx="14"/><rect x="212" y="52" width="96" height="88" rx="14"/><rect x="380" y="52" width="96" height="88" rx="14"/></g>
+<path d="M56 146L52 238M128 146L132 238M224 146L220 238M296 146L300 238M392 146L388 238M464 146L468 238" stroke-width="6" fill="none" class="sc" opacity=".8"/>
+<rect x="8" y="122" width="504" height="16" rx="3" class="fa"/><rect x="8" y="122" width="504" height="5" rx="2" fill="#fff" opacity=".14"/>
+<rect x="40" y="138" width="440" height="12" class="fa"/><rect x="40" y="138" width="440" height="12" fill="#000" opacity=".2"/>
+<rect x="52" y="150" width="12" height="92" class="fa"/><rect x="456" y="150" width="12" height="92" class="fa"/>
+<path d="M252 122Q243 102 253 84H267Q277 102 268 122Z" class="fd"/>
+<path d="M260 84Q257 52 272 28M260 84Q248 62 236 52M260 84Q270 60 288 50" stroke="#59634a" stroke-width="2" fill="none"/>
+<ellipse cx="272" cy="30" rx="6" ry="12" fill="#6d7358" transform="rotate(20 272 30)"/><ellipse cx="236" cy="52" rx="6" ry="11" fill="#78815f" transform="rotate(-50 236 52)"/><ellipse cx="288" cy="50" rx="6" ry="11" fill="#78815f" transform="rotate(55 288 50)"/>
+<ellipse cx="150" cy="122" rx="30" ry="6" fill="#efe6d2"/><ellipse cx="380" cy="122" rx="30" ry="6" fill="#efe6d2"/>
+</symbol>
+
+<symbol id="bed" viewBox="0 0 620 260">
+<ellipse cx="310" cy="256" rx="300" ry="4" fill="#000" opacity=".22"/>
+<rect x="14" y="184" width="58" height="72" rx="3" class="fa"/><rect x="14" y="184" width="58" height="72" fill="#000" opacity=".12"/><rect x="20" y="200" width="46" height="2" fill="#000" opacity=".3"/><rect x="42" y="214" width="6" height="6" class="fc"/>
+<rect x="548" y="184" width="58" height="72" rx="3" class="fa"/><rect x="548" y="184" width="58" height="72" fill="#000" opacity=".12"/><rect x="554" y="200" width="46" height="2" fill="#000" opacity=".3"/><rect x="572" y="214" width="6" height="6" class="fc"/>
+<use href="#tlamp" x="28" y="114" width="40" height="70"/><use href="#tlamp" x="552" y="114" width="40" height="70"/>
+<rect x="88" y="30" width="444" height="180" rx="8" class="fa"/>
+<rect x="104" y="46" width="412" height="124" rx="6" class="fb"/>
+<g fill="#000" opacity=".1"><rect x="206" y="46" width="2" height="124"/><rect x="310" y="46" width="2" height="124"/><rect x="414" y="46" width="2" height="124"/></g>
+<rect x="78" y="204" width="464" height="40" rx="4" class="fa"/><rect x="78" y="204" width="464" height="40" rx="4" fill="#000" opacity=".22"/>
+<rect x="84" y="168" width="452" height="50" rx="8" fill="#EFEAE0"/>
+<rect x="84" y="182" width="452" height="42" rx="8" class="fb"/><rect x="84" y="182" width="452" height="42" rx="8" fill="#000" opacity=".06"/>
+<rect x="84" y="208" width="452" height="22" rx="4" class="fd"/>
+<rect x="118" y="132" width="150" height="52" rx="22" fill="#F4F0E8"/><rect x="352" y="132" width="150" height="52" rx="22" fill="#F4F0E8"/>
+<rect x="150" y="118" width="120" height="44" rx="18" fill="#E4DDCE"/><rect x="350" y="118" width="120" height="44" rx="18" fill="#E4DDCE"/>
+</symbol>
+
+<symbol id="board" viewBox="0 0 460 190">
+<ellipse cx="230" cy="186" rx="222" ry="3.5" fill="#000" opacity=".22"/>
+<path d="M52 136L46 186M408 136L414 186" stroke-width="8" fill="none" class="sc"/>
+<rect x="8" y="56" width="444" height="90" rx="4" class="fa"/>
+<g class="fb"><rect x="16" y="64" width="101" height="74"/><rect x="125" y="64" width="101" height="74"/><rect x="234" y="64" width="101" height="74"/><rect x="343" y="64" width="101" height="74"/></g>
+<g fill="url(#flute)"><rect x="16" y="64" width="101" height="74"/><rect x="125" y="64" width="101" height="74"/><rect x="234" y="64" width="101" height="74"/><rect x="343" y="64" width="101" height="74"/></g>
+<g class="fc"><rect x="106" y="90" width="3" height="24"/><rect x="133" y="90" width="3" height="24"/><rect x="324" y="90" width="3" height="24"/><rect x="351" y="90" width="3" height="24"/></g>
+<rect x="8" y="56" width="444" height="5" fill="#fff" opacity=".14"/>
+<rect x="30" y="47" width="52" height="9" fill="#3a2b21"/><rect x="34" y="39" width="44" height="8" class="fd"/><rect x="36" y="32" width="38" height="7" fill="#e4dccd"/>
+<path d="M380 56Q368 40 378 20H392Q402 40 390 56Z" class="fd"/><path d="M385 20Q380 0 392 -10" stroke="#59634a" stroke-width="2" fill="none"/>
+<ellipse cx="220" cy="54" rx="30" ry="6" fill="#efe6d2"/>
+</symbol>
+
+<symbol id="desk" viewBox="0 0 480 270">
+<ellipse cx="240" cy="266" rx="230" ry="4" fill="#000" opacity=".25"/>
+<rect x="112" y="128" width="72" height="72" rx="18" class="fd"/><rect x="104" y="194" width="88" height="14" rx="7" class="fd"/><rect x="142" y="206" width="8" height="40" fill="#222"/><path d="M110 254L146 244L182 254" stroke="#222" stroke-width="5" fill="none" stroke-linecap="round"/>
+<rect x="20" y="124" width="440" height="12" rx="2" class="fa"/><rect x="20" y="124" width="440" height="4" fill="#fff" opacity=".14"/>
+<rect x="36" y="136" width="9" height="128" class="fa"/>
+<rect x="316" y="136" width="132" height="126" class="fa"/><rect x="316" y="136" width="132" height="126" fill="#000" opacity=".1"/>
+<g class="fb"><rect x="324" y="144" width="116" height="34"/><rect x="324" y="182" width="116" height="34"/><rect x="324" y="220" width="116" height="34"/></g>
+<g class="fc"><rect x="368" y="158" width="28" height="3"/><rect x="368" y="196" width="28" height="3"/><rect x="368" y="234" width="28" height="3"/></g>
+<rect x="150" y="40" width="170" height="80" rx="3" fill="#1e1e1b"/><rect x="155" y="45" width="160" height="66" fill="#3d4741"/><rect x="155" y="45" width="160" height="66" fill="#fff" opacity=".05"/>
+<rect x="228" y="120" width="14" height="6" fill="#1e1e1b"/>
+<path d="M66 124V84L102 54" stroke="#1e1e1b" stroke-width="3" fill="none"/><path d="M92 62L116 50L122 62Z" class="fc"/><rect x="54" y="120" width="26" height="4" fill="#1e1e1b"/>
+<rect x="262" y="112" width="40" height="8" fill="#e4dccd"/><rect x="266" y="105" width="32" height="7" class="fd"/>
+</symbol>
+
+<symbol id="plant" viewBox="0 0 140 300">
+<ellipse cx="70" cy="296" rx="42" ry="4" fill="#000" opacity=".25"/>
+<path d="M70 226C66 150 66 110 70 62M70 226C46 176 36 140 34 112M70 226C98 178 106 146 108 120" stroke="#4b5138" stroke-width="3" fill="none"/>
+<g class="fa"><ellipse cx="70" cy="52" rx="20" ry="36"/><ellipse cx="52" cy="150" rx="16" ry="28" transform="rotate(-40 52 150)"/><ellipse cx="90" cy="158" rx="16" ry="28" transform="rotate(40 90 158)"/></g>
+<g class="fb"><ellipse cx="34" cy="108" rx="18" ry="32" transform="rotate(-25 34 108)"/><ellipse cx="108" cy="116" rx="18" ry="32" transform="rotate(25 108 116)"/><ellipse cx="70" cy="104" rx="16" ry="30"/></g>
+<path d="M34 224H106L96 294H44Z" class="fc"/><path d="M34 224H106L104 234H36Z" fill="#fff" opacity=".14"/>
+</symbol>
+
+<symbol id="arclamp" viewBox="0 0 200 340">
+<ellipse cx="40" cy="335" rx="34" ry="5" fill="#000" opacity=".28"/>
+<ellipse cx="40" cy="330" rx="30" ry="6" fill="#d9d2c4"/>
+<path d="M40 330V64Q40 8 110 14Q150 18 156 60" stroke-width="4" fill="none" class="sc"/>
+<path d="M124 66A32 32 0 0 1 188 66Z" class="fd"/><ellipse cx="156" cy="66" rx="32" ry="5" fill="#FFE2A8"/>
+</symbol>
+
+<symbol id="ctable" viewBox="0 0 240 100">
+<ellipse cx="120" cy="96" rx="104" ry="4" fill="#000" opacity=".28"/>
+<path d="M56 40L44 94M184 40L196 94M98 46L94 90M142 46L146 90" stroke-width="6" fill="none" class="sc"/>
+<ellipse cx="120" cy="36" rx="112" ry="16" class="fa"/><ellipse cx="120" cy="36" rx="112" ry="16" fill="#000" opacity=".3"/>
+<ellipse cx="120" cy="29" rx="112" ry="16" class="fa"/><ellipse cx="120" cy="29" rx="100" ry="12" fill="#fff" opacity=".07"/>
+<rect x="88" y="19" width="46" height="8" rx="1" class="fd"/><rect x="92" y="12" width="38" height="7" rx="1" fill="#e4dccd"/>
+<path d="M156 26Q158 34 172 34Q186 34 188 26Z" fill="#c8bda6"/>
+</symbol>
+
+<symbol id="pendant" viewBox="0 0 90 320">
+<line x1="45" y1="0" x2="45" y2="196" stroke="#1d1a16" stroke-width="1.5"/>
+<path d="M8 262Q8 196 45 196Q82 196 82 262Z" class="fc"/><path d="M8 262Q8 196 45 196Q82 196 82 262Z" fill="#fff" opacity=".08"/>
+<ellipse cx="45" cy="262" rx="37" ry="6" fill="#FFE2A8"/>
+</symbol>
+
+<symbol id="robe" viewBox="0 0 300 360">
+<ellipse cx="150" cy="356" rx="146" ry="4" fill="#000" opacity=".22"/>
+<rect x="6" y="6" width="288" height="340" class="fa"/>
+<g class="fb"><rect x="12" y="12" width="92" height="322"/><rect x="104" y="12" width="92" height="322"/><rect x="196" y="12" width="92" height="322"/></g>
+<g fill="url(#flute)"><rect x="12" y="12" width="92" height="322"/><rect x="104" y="12" width="92" height="322"/><rect x="196" y="12" width="92" height="322"/></g>
+<rect x="6" y="334" width="288" height="18" class="fa"/><rect x="6" y="334" width="288" height="18" fill="#000" opacity=".3"/>
+<g class="fc"><rect x="94" y="150" width="3" height="60"/><rect x="111" y="150" width="3" height="60"/><rect x="186" y="150" width="3" height="60"/><rect x="203" y="150" width="3" height="60"/></g>
+</symbol>
+
+<symbol id="art1" viewBox="0 0 120 160"><rect width="120" height="160" class="fb"/><path d="M20 160V70A40 40 0 0 1 100 70V160Z" class="fd"/><circle cx="60" cy="52" r="14" class="fa"/></symbol>
+<symbol id="art2" viewBox="0 0 200 130"><rect width="200" height="130" class="fb"/><circle cx="70" cy="70" r="46" class="fa"/><rect x="118" y="26" width="50" height="78" class="fd"/></symbol>
+</defs></svg>
+
+<a class="sr" href="#main">Skip to content</a>
+
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="Saal, home">Saal</a>
+    <nav aria-label="Primary"><ul>
+      <li><a href="#rooms">Rooms</a></li><li><a href="#collection">Collection</a></li><li><a href="#custom">Custom</a></li><li><a href="#showroom">Showroom</a></li><li><a href="#reviews">Reviews</a></li>
+    </ul></nav>
+    <a class="btn" href="#showroom">Visit our store</a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </div>
+</header>
+<div class="sheet" id="sheet"><a href="#rooms">Rooms</a><a href="#collection">Collection</a><a href="#custom">Custom</a><a href="#showroom">Showroom</a><a href="#reviews">Reviews</a></div>
+
+<main id="main">
+<section class="hero" id="top" aria-label="Introduction">
+  <div class="hero-scene" data-scene="hero" role="img" aria-label="A warmly lit living room with an oat-coloured sofa, arc lamp and lounge chair"></div>
+  <div class="hero-veil"></div><div class="hero-shade"></div>
+  <div class="hero-copy">
+    <h1><span class="line"><span>Furniture made</span></span><span class="line"><span>for the way</span></span><span class="line"><span>you live.</span></span></h1>
+    <p class="lede">Thoughtfully designed pieces that bring comfort, character, and timeless style into your space.</p>
+    <div class="cta-row"><a class="btn btn-light" href="#collection">Explore Collection</a><a class="btn btn-ghost" href="#showroom">Visit Our Store</a></div>
+  </div>
+</section>
+
+<section class="intro"><div class="wrap intro-grid">
+  <h2>Furniture that transforms the way your space feels.</h2>
+  <p>Saal designs sofas, beds, tables and storage for Indian homes, and builds them in solid wood and honest fabrics. Every piece is drawn to be lived with for years, and to look better the longer you do.</p>
+</div></section>
+
+<section class="rooms" id="rooms"><div class="wrap">
+  <div class="sec-head"><h2>Start with a room.</h2><p>Eight ways into the collection, from a single armchair to a fully fitted wardrobe.</p></div>
+  <div class="cats">
+    <a class="cat" href="#collection"><div class="frame rv" data-par="30"><div class="img" data-scene="c_living"></div></div><div class="cap"><h3>Living Room</h3><span>View pieces</span></div></a>
+    <a class="cat" href="#collection"><div class="frame rv" data-par="30"><div class="img" data-scene="c_sofas"></div></div><div class="cap"><h3>Sofas</h3><span>View pieces</span></div></a>
+    <a class="cat" href="#collection"><div class="frame rv" data-par="30"><div class="img" data-scene="c_beds"></div></div><div class="cap"><h3>Beds &amp; Bedroom</h3><span>View pieces</span></div></a>
+    <a class="cat" href="#collection"><div class="frame rv" data-par="30"><div class="img" data-scene="c_dining"></div></div><div class="cap"><h3>Dining</h3><span>View pieces</span></div></a>
+    <a class="cat" href="#collection"><div class="frame rv" data-par="30"><div class="img" data-scene="c_chairs"></div></div><div class="cap"><h3>Chairs</h3><span>View pieces</span></div></a>
+    <a class="cat" href="#collection"><div class="frame rv" data-par="30"><div class="img" data-scene="c_office"></div></div><div class="cap"><h3>Office Furniture</h3><span>View pieces</span></div></a>
+    <a class="cat" href="#collection"><div class="frame rv" data-par="30"><div class="img" data-scene="c_storage"></div></div><div class="cap"><h3>Storage</h3><span>View pieces</span></div></a>
+    <a class="cat" href="#custom"><div class="frame rv" data-par="30"><div class="img" data-scene="c_custom"></div></div><div class="cap"><h3>Custom Furniture</h3><span>Design yours</span></div></a>
+  </div>
+</div></section>
+
+<section class="collection" id="collection"><div class="wrap">
+  <div class="sec-head"><h2>The collection.</h2><p>Six pieces we are proud of. Each one is built to order in our workshop.</p></div>
+  <div class="filterbar" role="group" aria-label="Filter collection"><button type="button" data-filter="all" aria-pressed="true">All pieces</button><button type="button" data-filter="seating" aria-pressed="false">Seating</button><button type="button" data-filter="dining" aria-pressed="false">Dining</button><button type="button" data-filter="bedroom" aria-pressed="false">Bedroom</button><button type="button" data-filter="storage" aria-pressed="false">Storage</button></div>
+  <div class="prods" id="prods"></div>
+</div></section>
+
+<section class="why" id="craft"><div class="wrap">
+  <div class="why-grid">
+    <div class="why-head"><h2>Why choose Saal.</h2><p>We make fewer things, and we make them properly. That is the whole idea.</p></div>
+    <ul class="pillars">
+      <li><h3>Premium Materials</h3><p>Carefully selected materials built for everyday living.</p></li>
+      <li><h3>Thoughtful Design</h3><p>Furniture designed to balance aesthetics, comfort, and functionality.</p></li>
+      <li><h3>Made to Last</h3><p>Quality craftsmanship designed for years of use.</p></li>
+      <li><h3>Custom Options</h3><p>Furniture tailored to your space and preferences.</p></li>
+    </ul>
+  </div>
+  <div class="mats" aria-label="Materials we work with">
+    <div class="mat m1" tabindex="0"><span>Sheesham</span></div>
+    <div class="mat m2 light" tabindex="0"><span>Oak</span></div>
+    <div class="mat m3" tabindex="0"><span>Walnut</span></div>
+    <div class="mat m4 light" tabindex="0"><span>Cane</span></div>
+    <div class="mat m5 light" tabindex="0"><span>Bouclé</span></div>
+    <div class="mat m6" tabindex="0"><span>Linen</span></div>
+    <div class="mat m7 light" tabindex="0"><span>Brass</span></div>
+  </div>
+</div></section>
+
+<section class="custom" id="custom"><div class="wrap custom-grid">
+  <div class="custom-copy">
+    <h2>Have a space in mind? Let's build it.</h2>
+    <p>Bring us a corner, an alcove or a whole room. We will change the dimensions, materials, finishes, colours and design until the piece belongs where it stands.</p>
+    <ul class="aspects"><li>Dimensions</li><li>Materials</li><li>Finishes</li><li>Colours</li><li>Designs</li></ul>
+    <a class="btn btn-light" id="discuss" href="mailto:hello@saal.example?subject=Custom%20furniture%20enquiry">Discuss Your Space</a>
+  </div>
+  <div class="conf" aria-label="Sample wardrobe configurator">
+    <div class="conf-view" id="confView" role="img" aria-label="Preview of a made-to-measure wardrobe"></div>
+    <div class="conf-ctl">
+      <div class="ctl full"><label for="w">Width <output id="wOut">240 cm</output></label><input id="w" type="range" min="120" max="360" step="10" value="240"></div>
+      <div class="ctl"><div class="lab">Material</div><div class="opts" data-key="mat">
+        <button class="opt" aria-pressed="true" data-v="Sheesham"><i style="background:#7a5236"></i>Sheesham</button>
+        <button class="opt" aria-pressed="false" data-v="Oak"><i style="background:#b89a6c"></i>Oak</button>
+        <button class="opt" aria-pressed="false" data-v="Walnut"><i style="background:#4a3628"></i>Walnut</button>
+        <button class="opt" aria-pressed="false" data-v="Sage"><i style="background:#8e9479"></i>Sage</button></div></div>
+      <div class="ctl"><div class="lab">Front</div><div class="opts" data-key="front">
+        <button class="opt" aria-pressed="true" data-v="Fluted">Fluted</button>
+        <button class="opt" aria-pressed="false" data-v="Flat">Flat</button>
+        <button class="opt" aria-pressed="false" data-v="Cane">Cane</button></div></div>
+      <div class="ctl full"><div class="lab">Handles</div><div class="opts" data-key="handle">
+        <button class="opt" aria-pressed="true" data-v="Brass">Brass</button>
+        <button class="opt" aria-pressed="false" data-v="Black">Black</button>
+        <button class="opt" aria-pressed="false" data-v="None">Push-to-open</button></div></div>
+      <div class="conf-sum"><span id="sum"></span><span>A sketch to start the conversation, not a final drawing.</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="showroom" id="showroom"><div class="wrap show-grid">
+  <div class="frame rv sh-a" data-par="30"><div class="img" data-scene="s_1"></div></div>
+  <div class="frame rv sh-b" data-par="30"><div class="img" data-scene="s_2"></div></div>
+  <div class="frame rv sh-c" data-par="30"><div class="img" data-scene="s_3"></div></div>
+  <div class="sh-info">
+    <h2>Sit on it before you decide.</h2>
+    <div><h4>Showroom</h4><address>Saal Studio<br>14 Design Lane, Indiranagar<br>Bengaluru 560038</address><p style="margin-top:1rem;color:var(--muted);font-size:.96rem">Every piece in the collection is on the floor. Bring a photo or a floor plan and we will walk it through with you.</p></div>
+    <div><h4>Opening hours</h4><ul class="hours" id="hours">
+      <li data-d="1,2,3,4,5"><span>Monday to Friday</span><span>10:30 am – 8:30 pm</span></li>
+      <li data-d="6"><span>Saturday</span><span>10:30 am – 9:00 pm</span></li>
+      <li data-d="0"><span>Sunday</span><span>11:00 am – 7:00 pm</span></li></ul></div>
+  </div>
+  <div class="map" id="map"><a class="btn btn-dark" href="https://www.google.com/maps/dir/?api=1&destination=Indiranagar%2C+Bengaluru" target="_blank" rel="noopener">Get Directions</a></div>
+</div></section>
+
+<section class="reviews" id="reviews"><div class="wrap">
+  <div class="sec-head"><h2>What people say after living with it.</h2></div>
+  <div class="rv-grid">
+    <div class="lead"><blockquote>We went in for a coffee table and left having ordered the sofa. I sat on it for twenty minutes before letting myself look at the price tag, and it still felt right afterwards. Eight months in, the bouclé hasn't pilled and the kids have tried hard.</blockquote>
+      <div class="who"><span class="stars" aria-label="5 out of 5"></span><b>Meera Iyer</b><span>Pune · Rhea sofa</span></div></div>
+    <ul class="rlist">
+      <li><span class="stars" data-n="5" aria-label="5 out of 5"></span><p>Sheesham top with real grain, not a printed one. Delivery took about a week longer than first promised, but they called us before we had to ask.</p><div class="who"><b>Rohan Kulkarni</b><span>Mumbai · Kavi dining table</span></div></li>
+      <li><span class="stars" data-n="5" aria-label="5 out of 5"></span><p>Our flat has an awkward alcove. They measured twice, showed us three finish samples, and the wall unit fits with about a finger's width to spare.</p><div class="who"><b>Farah Siddiqui</b><span>Chennai · Custom wall unit</span></div></li>
+      <li><span class="stars" data-n="4" aria-label="4 out of 5"></span><p>Very comfortable and good looking. I would have liked a slightly firmer seat, so I said so, and they have noted it for the next batch.</p><div class="who"><b>Arjun Nair</b><span>Bengaluru · Anahata chair</span></div></li>
+      <li><span class="stars" data-n="5" aria-label="5 out of 5"></span><p>Two people, forty minutes to assemble. No wobble and no squeak.</p><div class="who"><b>Tanvi Shah</b><span>Ahmedabad · Nidra bed</span></div></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="insta" id="inspiration"><div class="wrap">
+  <div class="sec-head"><h2>See it in a space.</h2><a class="btn btn-line" href="https://www.instagram.com/" target="_blank" rel="noopener">Follow Us on Instagram</a></div>
+  <div class="gal" id="gal"></div>
+</div></section>
+
+<section class="final" id="visit">
+  <div class="frame" data-par="60"><div class="img" data-scene="f_1"></div></div><div class="shade"></div>
+  <div class="wrap final-copy">
+    <h2>Your space deserves better furniture.</h2>
+    <p>Discover pieces designed to make your home feel unmistakably yours.</p>
+    <div class="cta-row"><a class="btn btn-light" href="#collection">Explore the Collection</a><a class="btn btn-ghost" href="#showroom">Visit Our Showroom</a></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <div class="foot">
+    <div><div class="brand">Saal</div><p>Furniture and interiors, designed and built in India.</p></div>
+    <div><h4>Explore</h4><ul><li><a href="#rooms">Rooms</a></li><li><a href="#collection">Collection</a></li><li><a href="#custom">Custom</a></li></ul></div>
+    <div><h4>Visit</h4><address>14 Design Lane<br>Indiranagar<br>Bengaluru 560038</address></div>
+    <div><h4>Say hello</h4><ul><li><a href="mailto:hello@saal.example">hello@saal.example</a></li><li><a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a></li></ul></div>
+  </div>
+  <div class="legal"><span>© 2026 Saal Furniture</span><span>Designed and built in India.</span></div>
+</div></footer>
+
+<dialog id="pd" aria-labelledby="pdName">
+  <button class="dlg-x" id="pdX" aria-label="Close">×</button>
+  <div class="dlg-grid">
+    <div class="dlg-img frame"><div class="img" id="pdImg"></div></div>
+    <div class="dlg-body">
+      <h3 id="pdName"></h3><p id="pdDesc" style="color:var(--muted)"></p>
+      <div class="dlg-price" id="pdPrice"></div>
+      <dl id="pdSpecs"></dl>
+      <a class="btn btn-dark" id="pdEnq" href="#">Enquire about this piece</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(()=>{
+const st=o=>Object.entries(o||{}).map(([k,v])=>`--${k}:${v}`).join(';');
+const U=(id,x,y,w,h,v)=>`<use href="#${id}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" style="${st(v)}"/>`;
+const R=(x,y,w,h,f,o=1,rx=0)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${f}" opacity="${o}"/>`;
+const E=(cx,cy,rx,ry,f,o=1)=>`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="${f}" opacity="${o}"/>`;
+const P=(pts,f,o=1)=>`<polygon points="${pts}" fill="${f}" opacity="${o}"/>`;
+const arch=(x,by,w,h,f,o=1)=>`<path d="M${x} ${by}V${by-h+w/2}A${w/2} ${w/2} 0 0 1 ${x+w} ${by-h+w/2}V${by}Z" fill="${f}" opacity="${o}"/>`;
+
+const T={
+ oat:{a:'#d6ccba',b:'#e5ddcf',c:'#3a2b21',d:'#8e9479'},
+ sage:{a:'#7d846a',b:'#8d9479',c:'#241f1a',d:'#e2d9c8'},
+ char:{a:'#3f3d38',b:'#4c4943',c:'#b08d57',d:'#cfc3a8'},
+ camel:{a:'#a98a66',b:'#b99b77',c:'#2b2622',d:'#ece5d8'},
+ olive:{a:'#6d7358',b:'#7c8365',c:'#2b2622',d:'#e4dccd'},
+ bone:{a:'#e7e1d5',b:'#f1ece2',c:'#7a5b3f',d:'#8e9479'},
+ ink:{a:'#34302b',b:'#443f38',c:'#b08d57',d:'#d6ccba'}
+};
+const W_={
+ sheesham:{a:'#7a5236',b:'#8a6244',c:'#1f1a16',d:'#b08d57'},
+ oak:{a:'#b89a6c',b:'#c8ac80',c:'#2b2622',d:'#7d846a'},
+ walnut:{a:'#4a3628',b:'#5b4534',c:'#b08d57',d:'#d6ccba'}
+};
+
+function base(W,H,fy,wall,floor){
+  let s=R(0,-400,W,fy+400,wall)+R(0,fy,W,H-fy+400,floor);
+  for(let i=1;i<7;i++){const y=fy+(H-fy)*Math.pow(i/7,1.5);s+=`<line x1="0" x2="${W}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="#000" stroke-opacity=".13" stroke-width="1.5"/>`;}
+  s+=R(0,fy-14,W,14,'#fff',.1)+R(0,fy,W,6,'#000',.16);
+  return s;
+}
+function win(x,y,w,h,sky){
+  const s=sky||['#d7c6a4','#eadcbc'];
+  return R(x,y,w,h,s[0])+R(x,y+h*.45,w,h*.55,s[1])+R(x+w*.08,y+h*.62,w*.14,h*.38,'#a8946f',.55)+R(x+w*.28,y+h*.5,w*.2,h*.5,'#a8946f',.45)+R(x+w*.56,y+h*.68,w*.16,h*.32,'#a8946f',.5)+
+   `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="none" stroke="#2f251d" stroke-width="12"/>`+R(x+w/2-4,y,8,h,'#2f251d')+R(x,y+h*.55-4,w,8,'#2f251d');
+}
+function planks(){return ''}
+const glow=(cx,cy,r,cls)=>`<circle class="${cls||''}" cx="${cx.toFixed(0)}" cy="${cy.toFixed(0)}" r="${r.toFixed(0)}" fill="url(#glowg)"/>`;
+
+/* Living room */
+function living(W,H,p){
+  p=p||{};const fy=Math.round(H*.69),bot=fy+H*.09;
+  const sw=W*.34,sh=sw*170/400,sx=W*.47,sy=bot-sh;
+  const lh=H*.47,lw=lh*200/340,lx=W*.385,ly=bot-lh;
+  const cw=W*.17,ch=cw*100/240,cx=W*.565,cy=fy+H*.25-ch;
+  const chw=W*.14,chh=chw*230/220,chx=W*.815,chy=fy+H*.15-chh;
+  const ph=H*.34,pw=ph*140/300,px=W*.9,py=fy+H*.07-ph;
+  const wx=W*.08,wy=H*.11,ww=W*.24,wh=H*.54;
+  const shade=[lx+lw*.78,ly+lh*.2];
+  let back=base(W,H,fy,p.wall||'#8f8171',p.floor||'#4a3a2e');
+  if(!p.nowin){back+=win(wx,wy,ww,wh)+P(`${wx+ww},${wy} ${W*.6},${H*.16} ${W*.6},${fy} ${wx+ww},${wy+wh}`,'#ffe7bd',.055)+P(`${wx},${fy} ${wx+ww},${fy} ${W*.72},${H} ${W*.3},${H}`,'#ffe7bd',.12);}
+  back+=U('art1',sx+sw*.3,H*.2,sw*.24,sw*.32,p.art||{a:'#3a2b21',b:'#d6ccba',d:'#8e9479'})+U('art2',sx+sw*.6,H*.26,sw*.4,sw*.26,p.art2||{a:'#b08d57',b:'#e4dccd',d:'#4a3a2e'});
+  let mid=E(W*.645,fy+H*.17,W*.33,H*.09,p.rug||'#cbbfab',1)+E(W*.645,fy+H*.17,W*.3,H*.075,'none',1).replace('fill="none"','fill="none" stroke="#8a7d69" stroke-width="2" stroke-opacity=".6"')+
+   U('arclamp',lx,ly,lw,lh,{c:'#b08d57',d:'#d8cdb6'})+
+   U('sofa',sx,sy,sw,sh,p.sofa||T.oat)+
+   U('plant',px,py,pw,ph,{a:'#59634a',b:'#78815f',c:'#b9ac9a'})+
+   U('ctable',W*.565,cy,cw,ch,{a:'#3a2b21',c:'#1f1a16',b:'#b08d57',d:'#8e9479'})+
+   U('chair',chx,chy,chw,chh,p.chair||T.olive);
+  let g=glow(shade[0],shade[1]+H*.05,H*.32,'glow');
+  let hot='';
+  if(p.hot){const hx=sx+sw*.5,hy=sy+sh*.42;
+    hot=`<g class="hot" tabindex="0" role="button" aria-label="View Rhea sofa" data-open="0"><circle class="pulse" cx="${hx}" cy="${hy}" r="14" fill="#fff" fill-opacity=".6"/><circle cx="${hx}" cy="${hy}" r="10" fill="#efe9dc" stroke="#1d1a16" stroke-opacity=".5"/><rect class="tag" x="${hx+26}" y="${hy-24}" width="260" height="48" fill="#efe9dc"/><text x="${hx+40}" y="${hy+8}">Rhea sofa · ₹84,900</text></g>`;}
+  return {W,H,body:`<g class="lyr" data-d="3">${back}</g><g class="lyr" data-d="9">${mid}${g}${hot}</g>`};
+}
+
+/* Sofa studio */
+function sofaStudio(W,H,p){
+  p=p||{};const fy=H*.66;
+  const sw=W*.78,sh=sw*170/400;
+  return {W,H,body:base(W,H,fy,p.wall||'#a3a78d',p.floor||'#6c6a58')+arch(W*.22,fy,W*.56,H*.62,p.arch||'#b6b9a0',.7)+
+   U('tlamp',W*.86-20,fy-H*.09-H*.14,W*.08,W*.08*90/50,{c:'#241f1a'})+E(W*.9,fy+H*.05,W*.05,H*.012,'#000',.15)+
+   E(W*.5,fy+H*.14,W*.42,H*.045,p.rug||'#000',p.rug?1:.13)+U('sofa',W*.11,fy+H*.08-sh,sw,sh,p.sofa||T.oat)+
+   P(`${W*.7},0 ${W},0 ${W},${H} ${W*.4},${H}`,'#fff',.05)};
+}
+/* Chairs studio */
+function chairs(W,H,p){
+  p=p||{};const fy=H*.66;const n=p.count||3;let s=base(W,H,fy,p.wall||'#c4b7a2',p.floor||'#a89a86')+arch(W*.3,fy,W*.4,H*.55,'#d3c8b4',.8);
+  const tones=p.tones||[T.olive,T.oat,{a:'#6b4a36',b:'#7c5a44',c:'#1f1a16',d:'#e4dccd'}];
+  if(n===1){const cw=W*.62,chh=cw*230/220;s+=E(W*.5,fy+H*.16,W*.3,H*.03,'#000',.14)+U('chair',W*.19,fy+H*.16-chh,cw,chh,tones[0]);}
+  else{const cw=W*.3,chh=cw*230/220;const xs=[W*.09,W*.35,W*.61];for(let i=0;i<3;i++)s+=U('chair',xs[i],fy+H*(.12+(i===1?.03:0))-chh,cw,chh,tones[i]);}
+  return {W,H,body:s};
+}
+/* Bedroom */
+function bedroom(W,H,p){
+  p=p||{};const fy=H*.68;const bw=W*.8,bh=bw*260/620;
+  return {W,H,body:base(W,H,fy,p.wall||'#d5cdbf',p.floor||'#7b6853')+
+   (p.win===false?'':win(W*.06,H*.1,W*.2,H*.34,['#e2d6bb','#f0e6cf'])+P(`${W*.26},${H*.1} ${W*.55},${H*.14} ${W*.55},${fy} ${W*.26},${H*.44}`,'#fff',.14))+
+   U('art2',W*.42,H*.12,W*.3,W*.195,{a:'#8e9479',b:'#e4dccd',d:'#7a5236'})+
+   E(W*.5,fy+H*.2,W*.44,H*.06,p.rug||'#b8ac97',1)+
+   U('bed',W*.1,fy+H*.1-bh,bw,bh,p.bed||{a:'#7a5236',b:'#a39b84',c:'#1f1a16',d:'#8e9479'})+
+   U('plant',W*.88,fy+H*.05-H*.3,H*.3*140/300,H*.3,{a:'#59634a',b:'#78815f',c:'#b9ac9a'})};
+}
+/* Dining */
+function dining(W,H,p){
+  p=p||{};const fy=H*.66;const tw=W*(p.tw||.72),th=tw*250/520,cx=(p.cx||.5)*W;
+  let s=base(W,H,fy,p.wall||'#7d6f5f',p.floor||'#40342a');
+  s+=U('art1',cx-tw*.46,H*.16,W*.13,W*.13*160/120,{a:'#3a2b21',b:'#d6ccba',d:'#8e9479'});
+  const ph=H*.52,pw=ph*90/320;
+  [.28,.5,.72].forEach(f=>{const x=cx-tw/2+tw*f-pw/2;s+=U('pendant',x,-ph*.05,pw,ph,{c:p.pend||'#b08d57'});s+=glow(x+pw/2,ph*.78,H*.22,'glow');});
+  s+=E(cx,fy+H*.17,tw*.6,H*.06,p.rug||'#000',p.rug?1:.16)+U('dining',cx-tw/2,fy+H*.14-th,tw,th,p.set||{a:'#7a5236',b:'#c9bda8',c:'#1f1a16',d:'#8e9479'});
+  return {W,H,body:s};
+}
+/* Study */
+function study(W,H,p){
+  p=p||{};const fy=H*.68;const dw=W*.72,dh=dw*270/480;
+  let s=base(W,H,fy,p.wall||'#3d4238',p.floor||'#2b2a26');
+  s+=R(W*.16,H*.26,W*.68,7,'#b08d57')+R(W*.16,H*.14,W*.42,7,'#b08d57');
+  const bk=['#d6ccba','#8e9479','#b08d57','#4a3628','#e4dccd','#7d846a'];
+  let x=W*.18;for(let i=0;i<9;i++){const w=W*(.018+(i%3)*.006),h=H*(.05+(i%4)*.012);s+=R(x,H*.26-h,w,h,bk[i%6]);x+=w+3;}
+  x=W*.62;for(let i=0;i<6;i++){const w=W*.02,h=H*.045+(i%3)*H*.01;s+=R(x,H*.26-h,w,h,bk[(i+2)%6]);x+=w+3;}
+  s+=P(`${W*.05},${H*.1} ${W*.32},${H*.04} ${W*.45},${fy} ${W*.02},${fy}`,'#ffe7bd',.05);
+  s+=E(W*.5,fy+H*.16,W*.36,H*.05,'#57574a',1)+U('desk',W*.14,fy+H*.12-dh,dw,dh,p.desk||{a:'#b89a6c',b:'#c8ac80',c:'#b08d57',d:'#6d7358'})+
+   U('plant',W*.02,fy+H*.05-H*.32,H*.32*140/300,H*.32,{a:'#59634a',b:'#78815f',c:'#b9ac9a'});
+  return {W,H,body:s};
+}
+/* Hall / storage */
+function hall(W,H,p){
+  p=p||{};const fy=H*.7;const bw=W*(p.bw||.7),bh=bw*190/460;
+  let s=base(W,H,fy,p.wall||'#b5a893',p.floor||'#5d4c3d');
+  s+=`<circle cx="${W*.3}" cy="${H*.28}" r="${W*.12}" fill="#e6dfd2" stroke="#3a2b21" stroke-width="6"/><circle cx="${W*.3}" cy="${H*.28}" r="${W*.12}" fill="#fff" opacity=".18"/>`;
+  s+=U('art1',W*.52,H*.16,W*.14,W*.14*160/120,{a:'#3a2b21',b:'#d6ccba',d:'#8e9479'})+U('art2',W*.7,H*.2,W*.18,W*.18*.65,{a:'#b08d57',b:'#e4dccd',d:'#4a3a2e'});
+  s+=P(`${W*.6},0 ${W},0 ${W},${H} ${W*.3},${H}`,'#fff',.05);
+  s+=U('board',W*(.5-(p.bw||.7)/2),fy+H*.08-bh,bw,bh,p.board||{a:'#4a3628',b:'#7a5236',c:'#b08d57',d:'#d6ccba'})+
+   U('plant',W*.86,fy+H*.05-H*.3,H*.3*140/300,H*.3,{a:'#59634a',b:'#78815f',c:'#b9ac9a'});
+  return {W,H,body:s};
+}
+/* Custom drawing */
+function customScene(W,H,p){
+  p=p||{};const fy=H*.72;const rw=W*.42,rh=rw*360/300;
+  const x=W*.5-rw/2,y=fy+H*.03-rh;
+  let s=base(W,H,fy,'#dcd5c8','#b9ad9a');
+  for(let i=1;i<12;i++)s+=`<line x1="${W*i/12}" y1="0" x2="${W*i/12}" y2="${fy}" stroke="#3a2b21" stroke-opacity=".07"/>`;
+  for(let i=1;i<9;i++)s+=`<line x1="0" y1="${fy*i/9}" x2="${W}" y2="${fy*i/9}" stroke="#3a2b21" stroke-opacity=".07"/>`;
+  s+=U('robe',x,y,rw,rh,p.v||{a:'#7a5236',b:'#8a6244',c:'#b08d57'});
+  const ty=y+rh+H*.04;
+  s+=`<g stroke="#3a2b21" stroke-width="2" fill="none"><path d="M${x} ${ty}H${x+rw}M${x} ${ty-8}V${ty+8}M${x+rw} ${ty-8}V${ty+8}"/><path d="M${x+rw+W*.05} ${y}V${y+rh}M${x+rw+W*.05-8} ${y}H${x+rw+W*.05+8}M${x+rw+W*.05-8} ${y+rh}H${x+rw+W*.05+8}"/></g>`+
+   `<text x="${W*.5}" y="${ty+30}" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="${W*.036}" fill="#3a2b21">${p.dim||'240 cm'}</text><text transform="translate(${x+rw+W*.05+30} ${y+rh/2}) rotate(90)" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="${W*.036}" fill="#3a2b21">220 cm</text>`;
+  return {W,H,body:s};
+}
+/* Wall unit (product) */
+function wallUnit(W,H){
+  const fy=H*.72;let s=base(W,H,fy,'#cfc7b8','#8a7b68');
+  const uw=W*.86,uh=H*.5,ux=W*.07,uy=fy+H*.02-uh;
+  s+=R(ux,uy,uw,uh,'#3f4a3c')+R(ux+8,uy+8,uw*.3,uh-16,'#e4dccd')+R(ux+uw*.32,uy+8,uw*.34,uh*.45,'#e4dccd')+R(ux+uw*.32,uy+uh*.5,uw*.34,uh*.46,'#e4dccd')+R(ux+uw*.68,uy+8,uw*.3,uh-16,'#e4dccd');
+  s+=R(ux+uw*.32,uy+uh*.5-4,uw*.34,8,'#3f4a3c');
+  s+=arch(ux+uw*.06,uy+uh-8,uw*.18,uh*.5,'#8e9479',1);
+  s+=R(ux+uw*.4,uy+uh*.5-uh*.2,uw*.05,uh*.2,'#3a2b21')+R(ux+uw*.5,uy+uh*.5-uh*.12,uw*.06,uh*.12,'#b08d57');
+  s+=R(ux+uw*.72,uy+uh*.15,uw*.08,uh*.28,'#b08d57')+R(ux+uw*.84,uy+uh*.5,uw*.1,uh*.4,'#7a5236');
+  s+=R(ux,uy+uh,uw,H*.03,'#2b2622')+E(W*.5,fy+H*.08,W*.44,H*.02,'#000',.18);
+  s+=U('plant',W*.88,fy+H*.07-H*.28,H*.28*140/300,H*.28,{a:'#59634a',b:'#78815f',c:'#b9ac9a'});
+  return {W,H,body:s};
+}
+
+const SC={
+ hero:()=>living(1600,1000,{hot:true}),
+ c_living:()=>living(1200,800,{wall:'#b9ad9b',floor:'#6d5a48',sofa:T.sage,chair:T.oat,rug:'#d3c9b6',nowin:false}),
+ c_sofas:()=>sofaStudio(800,900,{sofa:T.oat}),
+ c_beds:()=>bedroom(800,900,{}),
+ c_dining:()=>dining(800,900,{tw:.78,cx:.5}),
+ c_chairs:()=>chairs(800,900,{}),
+ c_office:()=>study(800,900,{}),
+ c_storage:()=>hall(800,900,{}),
+ c_custom:()=>customScene(800,900,{}),
+ p_rhea:()=>sofaStudio(1050,900,{wall:'#a3a78d',floor:'#6c6a58',sofa:T.oat}),
+ p_anahata:()=>chairs(800,1000,{count:1,tones:[T.olive],wall:'#c9bda9',floor:'#a89a86'}),
+ p_kavi:()=>dining(800,1000,{tw:.84,cx:.5,wall:'#8b7d6c'}),
+ p_nidra:()=>bedroom(900,900,{wall:'#cfc6b6',bed:{a:'#4a3628',b:'#b6ab92',c:'#1f1a16',d:'#8e9479'}}),
+ p_vana:()=>hall(1000,830,{wall:'#bfb29d',bw:.62}),
+ p_wall:()=>wallUnit(800,1066),
+ s_1:()=>living(1200,800,{wall:'#c9beac',floor:'#8a7660',sofa:T.camel,chair:T.char,rug:'#ddd3c0'}),
+ s_2:()=>hall(800,1000,{wall:'#a99b85',board:{a:'#7a5236',b:'#8a6244',c:'#b08d57',d:'#d6ccba'}}),
+ s_3:()=>chairs(900,900,{wall:'#d1c6b3',floor:'#b3a48e',tones:[T.oat,T.sage,T.char]}),
+ i_1:()=>living(1000,1200,{wall:'#c2b7a4',floor:'#7a6650',sofa:T.sage,chair:T.camel,rug:'#d8cebb'}),
+ i_2:()=>bedroom(900,700,{wall:'#c7bfaf',bed:{a:'#b89a6c',b:'#8e9479',c:'#2b2622',d:'#d6ccba'}}),
+ i_3:()=>dining(900,800,{wall:'#a9998a',floor:'#5c4a3b',set:{a:'#4a3628',b:'#8e9479',c:'#1f1a16',d:'#d6ccba'}}),
+ i_4:()=>sofaStudio(800,1000,{wall:'#c5b7a2',floor:'#8c7a64',arch:'#d8cdb9',sofa:T.char}),
+ i_5:()=>chairs(1000,800,{wall:'#6f7562',floor:'#3f4236',tones:[T.oat,T.camel,T.oat]}),
+ i_6:()=>study(1000,900,{wall:'#8a8f76',floor:'#4a4a3c',desk:{a:'#4a3628',b:'#5b4534',c:'#b08d57',d:'#c9b98f'}}),
+ i_7:()=>hall(900,1000,{wall:'#d0c6b3',floor:'#8a7860',board:{a:'#b89a6c',b:'#c8ac80',c:'#2b2622',d:'#7d846a'}}),
+ i_8:()=>living(1200,800,{wall:'#4d4a41',floor:'#2d2a25',sofa:T.oat,chair:T.sage,rug:'#5a564a'}),
+ f_1:()=>dining(1600,900,{tw:.5,cx:.68,wall:'#6f6253',floor:'#33291f'})
+};
+const PHOTO={
+ hero:'/saal/assets/hero-living.jpg',
+ c_living:'/saal/assets/indian-living.jpg',
+ c_sofas:'/saal/assets/family-living.jpg',
+ c_beds:'/saal/assets/bright-living.jpg',
+ c_dining:'/saal/assets/airy-living.jpg',
+ c_chairs:'/saal/assets/family-living.jpg',
+ c_office:'/saal/assets/warm-interior.jpg',
+ c_storage:'/saal/assets/coffee-table.jpg',
+ c_custom:'/saal/assets/wood-grain.jpg',
+ p_rhea:'/saal/assets/family-living.jpg',
+ p_anahata:'/saal/assets/bright-living.jpg',
+ p_kavi:'/saal/assets/airy-living.jpg',
+ p_nidra:'/saal/assets/warm-interior.jpg',
+ p_vana:'/saal/assets/wood-grain.jpg',
+ p_wall:'/saal/assets/coffee-table.jpg',
+ s_1:'/saal/assets/indian-living.jpg',
+ s_2:'/saal/assets/wood-grain.jpg',
+ s_3:'/saal/assets/family-living.jpg',
+ i_1:'/saal/assets/hero-living.jpg',
+ i_2:'/saal/assets/bright-living.jpg',
+ i_3:'/saal/assets/airy-living.jpg',
+ i_4:'/saal/assets/warm-interior.jpg',
+ i_5:'/saal/assets/family-living.jpg',
+ i_6:'/saal/assets/wood-grain.jpg',
+ i_7:'/saal/assets/coffee-table.jpg',
+ i_8:'/saal/assets/indian-living.jpg',
+ f_1:'/saal/assets/airy-living.jpg'
+};
+const photoOf=(k,cls='scene-photo')=>`<img class="${cls}" src="${PHOTO[k]}" alt="" loading="lazy" decoding="async">`;
+const fill=root=>(root||document).querySelectorAll('[data-scene]').forEach(el=>{if(!el.firstChild)el.innerHTML=photoOf(el.dataset.scene)});
+/* Products */
+const PRODUCTS=[
+ {k:'p_rhea',cat:'seating',name:'Rhea Sofa',desc:'A deep three-seater in oat bouclé on a solid sal frame.',price:'₹84,900',specs:[['Size','225 × 95 × 78 cm'],['Frame','Kiln-dried sal wood'],['Cover','Oat bouclé, removable'],['Seats','Three']]},
+ {k:'p_anahata',cat:'seating',name:'Anahata Lounge Chair',desc:'A rounded barrel chair that holds you the way a good armchair should.',price:'₹32,500',specs:[['Size','78 × 80 × 74 cm'],['Frame','Sheesham legs, sal frame'],['Cover','Olive linen blend'],['Seats','One']]},
+ {k:'p_kavi',cat:'dining',name:'Kavi Dining Table',desc:'A solid sheesham top on slim legs, sized for six.',price:'₹96,000',specs:[['Size','180 × 90 × 76 cm'],['Top','Solid sheesham, oil finish'],['Legs','Solid sheesham'],['Seats','Six']]},
+ {k:'p_nidra',cat:'bedroom',name:'Nidra Bed',desc:'A fluted headboard and low platform base in walnut-stained sheesham.',price:'₹74,500',specs:[['Size','King, 190 × 215 cm'],['Frame','Walnut-stained sheesham'],['Headboard','Upholstered panel'],['Mattress','Not included']]},
+ {k:'p_vana',cat:'storage',name:'Vana Sideboard',desc:'Fluted doors and brass pulls on a quiet, low body.',price:'₹58,000',specs:[['Size','160 × 42 × 74 cm'],['Body','Walnut veneer on solid frame'],['Doors','Fluted, soft-close'],['Pulls','Solid brass']]},
+ {k:'p_wall',cat:'storage',name:'Made-to-order Wall Unit',desc:'Shelving, cabinets and a reading niche, drawn around your wall.',price:'Get a Quote',specs:[['Size','Made to your dimensions'],['Materials','Wood, cane, paint, brass'],['Process','Visit, drawing, samples, build'],['Timeline','Confirmed with your quote']]}
+];
+const pr=document.getElementById('prods');
+pr.innerHTML=PRODUCTS.map((p,i)=>`<article class="prod" data-category="${p.cat}"><div class="frame rv" data-par="30" data-open="${i}" tabindex="0" role="button" aria-label="View ${p.name}"><div class="img" data-scene="${p.k}"></div></div><div class="pmeta"><h3>${p.name}</h3><span class="price">${p.price}</span><p>${p.desc}</p><button class="tlink" data-open="${i}">View Details</button></div></article>`).join('');
+
+/* Gallery */
+const CAPS=['Rhea sofa, Pune','Nidra bed, Chennai','Kavi table, Mumbai','Rhea in charcoal','Anahata chairs','Study wall, Bengaluru','Vana sideboard','Evening in Hyderabad'];
+document.getElementById('gal').innerHTML=CAPS.map((c,i)=>`<a class="g g${i+1}" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="${c} on Instagram"><div class="frame rv" data-par="24"><div class="img" data-scene="i_${i+1}"></div></div><span class="cp">${c}</span></a>`).join('');
+
+/* Collection filter */
+document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{
+ const filter=btn.dataset.filter;
+ document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===btn)));
+ document.querySelectorAll('.prod').forEach(card=>{const show=filter==='all'||card.dataset.category===filter;card.hidden=!show;card.classList.toggle('is-hidden',!show);});
+}));
+/* Stars */
+document.querySelectorAll('.stars').forEach(el=>{const n=+(el.dataset.n||5);let h='';for(let i=0;i<5;i++)h+=`<svg viewBox="0 0 20 20" class="${i<n?'':'off'}"><path d="M10 1.5l2.6 5.5 6 .8-4.4 4.2 1.1 6L10 15l-5.3 3 1.1-6L1.4 7.8l6-.8z"/></svg>`;el.innerHTML=h;});
+
+/* Hours highlight */
+const day=new Date().getDay();document.querySelectorAll('#hours li').forEach(li=>{if(li.dataset.d.split(',').includes(String(day)))li.classList.add('today')});
+
+/* Map */
+document.getElementById('map').insertAdjacentHTML('afterbegin',`<svg viewBox="0 0 1200 520" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Map showing the Saal showroom in Indiranagar">
+<rect width="1200" height="520" fill="#e5dfd3"/>
+<g fill="#d9d1c2"><rect x="30" y="30" width="260" height="150"/><rect x="330" y="30" width="200" height="150"/><rect x="30" y="230" width="180" height="120"/><rect x="250" y="230" width="280" height="120"/><rect x="600" y="30" width="220" height="130"/><rect x="880" y="30" width="290" height="170"/><rect x="880" y="250" width="290" height="110"/><rect x="600" y="230" width="220" height="140"/><rect x="30" y="400" width="500" height="100"/><rect x="600" y="420" width="570" height="80"/></g>
+<path d="M60 380L260 360L330 470L120 500Z" fill="#c4c9ae" opacity=".0"/>
+<rect x="600" y="230" width="220" height="140" fill="#c9cfb3"/>
+<g stroke="#f6f2ea" stroke-width="16" fill="none"><path d="M0 205H1200"/><path d="M565 0V520"/><path d="M0 385L1200 395"/><path d="M850 0V520" stroke-width="10"/><path d="M300 0V520" stroke-width="10"/></g>
+<g fill="#6c655a" font-family="Instrument Sans,Arial,sans-serif" font-size="15"><text x="90" y="199">100 Feet Road</text><text x="580" y="60" transform="rotate(90 580 60)">Design Lane</text><text x="640" y="305" fill="#59634a">Park</text></g>
+<g transform="translate(565 205)"><circle r="34" fill="#b08d57" opacity=".25"/><path d="M0 -12C-14 -12 -22 -2 -22 8C-22 22 0 42 0 42C0 42 22 22 22 8C22 -2 14 -12 0 -12Z" transform="translate(0 -30)" fill="#26231F"/><circle cy="-22" r="7" fill="#efeae0"/></g>
+<text x="592" y="170" font-family="Bodoni Moda,Georgia,serif" font-size="26" fill="#26231F">Saal Studio</text>
+</svg>`);
+
+/* Dialog */
+const pd=document.getElementById('pd');
+function openProd(i){const p=PRODUCTS[i];
+  document.getElementById('pdImg').innerHTML=photoOf(p.k,'scene-photo');
+  document.getElementById('pdName').textContent=p.name;document.getElementById('pdDesc').textContent=p.desc;
+  document.getElementById('pdPrice').textContent=p.price==='Get a Quote'?'Get a quote':p.price;
+  document.getElementById('pdSpecs').innerHTML=p.specs.map(s=>`<div><dt>${s[0]}</dt><dd>${s[1]}</dd></div>`).join('');
+  document.getElementById('pdEnq').href='mailto:hello@saal.example?subject='+encodeURIComponent('Enquiry: '+p.name);
+  if(typeof pd.showModal==='function')pd.showModal();else pd.setAttribute('open','');}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-open]');if(t){e.preventDefault();openProd(+t.dataset.open);}});
+document.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('.frame[data-open],.hot')){e.preventDefault();openProd(+e.target.dataset.open);}});
+document.getElementById('pdX').onclick=()=>pd.close();
+pd.addEventListener('click',e=>{if(e.target===pd)pd.close()});
+
+/* Configurator */
+const MATS={Sheesham:'#7a5236',Oak:'#b89a6c',Walnut:'#4a3628',Sage:'#8e9479'};
+const HAND={Brass:'#b08d57',Black:'#1d1b18',None:null};
+const cfg={w:240,mat:'Sheesham',front:'Fluted',handle:'Brass'};
+function unit(){
+  const s=1.25,uh=220*s,uw=cfg.w*s,fy=350,x0=(640-uw)/2,top=fy-uh;
+  const n=Math.max(2,Math.round(cfg.w/55)),dw=uw/n,col=MATS[cfg.mat],hc=HAND[cfg.handle];
+  let o=`<rect width="640" height="440" fill="#d9d2c5"/><rect y="${fy}" width="640" height="90" fill="#b9ad9a"/><rect y="${fy-3}" width="640" height="3" fill="#fff" opacity=".2"/>`;
+  o+=`<ellipse cx="320" cy="${fy+2}" rx="${uw/2+6}" ry="6" fill="#000" opacity=".2"/><rect x="${x0}" y="${top}" width="${uw}" height="${uh}" fill="${col}"/><rect x="${x0}" y="${top}" width="${uw}" height="${uh}" fill="#000" opacity=".25"/>`;
+  for(let i=0;i<n;i++){const dx=x0+i*dw+2;
+    let f=cfg.front==='Cane'?'#d9c08a':col;
+    o+=`<rect x="${dx}" y="${top+3}" width="${dw-4}" height="${uh-16}" fill="${f}"/>`;
+    if(cfg.front==='Fluted')o+=`<rect x="${dx}" y="${top+3}" width="${dw-4}" height="${uh-16}" fill="url(#flute)"/>`;
+    if(cfg.front==='Cane')o+=`<rect x="${dx}" y="${top+3}" width="${dw-4}" height="${uh-16}" fill="${col}" opacity=".3"/><rect x="${dx}" y="${top+3}" width="${dw-4}" height="${uh-16}" fill="url(#cane)"/><rect x="${dx+6}" y="${top+9}" width="${dw-16}" height="${uh-28}" fill="none" stroke="${col}" stroke-width="6"/>`;
+    o+=`<rect x="${dx}" y="${top+3}" width="${dw-4}" height="4" fill="#fff" opacity=".12"/>`;
+    if(hc){const hx=i%2===0?dx+dw-13:dx+7;o+=`<rect x="${hx}" y="${top+uh*.42}" width="3.5" height="46" fill="${hc}"/>`;}
+    else if(i%2===0){o+=`<rect x="${dx+dw-5}" y="${top+3}" width="2" height="${uh-16}" fill="#000" opacity=".22"/>`;}
+  }
+  o+=`<rect x="${x0}" y="${fy-13}" width="${uw}" height="13" fill="#1f1a16"/>`;
+  const dy=fy+34,vx=x0+uw+26;
+  o+=`<g stroke="#3a2b21" stroke-width="1.5" fill="none"><path d="M${x0} ${dy}H${x0+uw}M${x0} ${dy-7}V${dy+7}M${x0+uw} ${dy-7}V${dy+7}"/><path d="M${vx} ${top}V${fy}M${vx-7} ${top}H${vx+7}M${vx-7} ${fy}H${vx+7}"/></g>`;
+  o+=`<text x="320" y="${dy+26}" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="18" fill="#3a2b21">${cfg.w} cm</text><text transform="translate(${vx+22} ${(top+fy)/2}) rotate(90)" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="18" fill="#3a2b21">220 cm</text>`;
+  return `<svg viewBox="0 0 640 440" preserveAspectRatio="xMidYMid meet">${o}</svg>`;
+}
+const cv=document.getElementById('confView'),sum=document.getElementById('sum'),disc=document.getElementById('discuss');
+function upd(){cv.innerHTML=unit();document.getElementById('wOut').textContent=cfg.w+' cm';
+  const t=`${cfg.mat}, ${cfg.front.toLowerCase()} fronts, ${cfg.handle==='None'?'push-to-open':cfg.handle.toLowerCase()+' handles'}, ${cfg.w} × 220 cm`;
+  sum.textContent=t;
+  disc.href='mailto:hello@saal.example?subject='+encodeURIComponent('Custom furniture enquiry')+'&body='+encodeURIComponent('Hi Saal,\n\nI am thinking about a wardrobe: '+t+'.\nMy space: \n\nThanks,');}
+document.getElementById('w').addEventListener('input',e=>{cfg.w=+e.target.value;upd()});
+document.querySelectorAll('.opts').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('.opt');if(!b)return;g.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');cfg[g.dataset.key]=b.dataset.v;upd();}));
+upd();
+
+/* Fill scenes */
+fill();
+
+
+/* Nav */
+const nav=document.getElementById('nav');
+const onScroll=()=>{nav.classList.toggle('solid',scrollY>60||document.body.classList.contains('menu-open')&&false)};
+document.getElementById('burger').addEventListener('click',()=>{const o=document.body.classList.toggle('menu-open');document.getElementById('burger').setAttribute('aria-expanded',o)});
+document.querySelectorAll('#sheet a').forEach(a=>a.addEventListener('click',()=>{document.body.classList.remove('menu-open');document.getElementById('burger').setAttribute('aria-expanded','false')}));
+
+/* Reveal + parallax */
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.frame.rv').forEach(f=>io.observe(f));
+const pars=[...document.querySelectorAll('.frame[data-par]')],lyrs=[...document.querySelectorAll('.lyr')];
+let tick=false;
+function frame(){tick=false;const vh=innerHeight;
+  if(!rm){pars.forEach(f=>{const r=f.getBoundingClientRect();if(r.bottom<-50||r.top>vh+50)return;const p=(r.top+r.height/2-vh/2)/vh;f.firstElementChild.style.transform=`translate3d(0,${(-p*+f.dataset.par).toFixed(1)}px,0)`});
+    if(scrollY<vh*1.2)lyrs.forEach(l=>{l.style.transform=`translate3d(0,${(scrollY*(+l.dataset.d)/100).toFixed(1)}px,0)`});}
+  onScroll();}
+addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(frame)}},{passive:true});
+addEventListener('resize',frame);
+frame();
+requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.add('loaded')));
+setTimeout(()=>document.body.classList.add('loaded'),600);
+})();
+</script>
+</body>
+</html>
