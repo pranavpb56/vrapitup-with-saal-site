@@ -1,10 +1,10 @@
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
 function clean(value, max = 5000) {
   return String(value ?? "").trim().slice(0, max);
 }
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
   const { GMAIL_USER, GMAIL_APP_PASSWORD, TO_EMAIL } = process.env;
 
   if (!GMAIL_USER || !GMAIL_APP_PASSWORD) {
-    console.error("Missing GMAIL_USER or GMAIL_APP_PASSWORD environment variables.");
+    console.error("Missing Gmail environment variables.");
     return res.status(500).json({ error: "Email service is not configured." });
   }
 
@@ -32,17 +32,12 @@ module.exports = async (req, res) => {
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
-      auth: {
-        user: GMAIL_USER,
-        pass: GMAIL_APP_PASSWORD,
-      },
+      auth: { user: GMAIL_USER, pass: GMAIL_APP_PASSWORD },
     });
-
-    const recipient = TO_EMAIL || "vrapitupp@gmail.com";
 
     await transporter.sendMail({
       from: `"vrapitup Website" <${GMAIL_USER}>`,
-      to: recipient,
+      to: TO_EMAIL || GMAIL_USER,
       replyTo: email,
       subject: `New vrapitup enquiry — ${name}`,
       text: [
@@ -65,4 +60,4 @@ module.exports = async (req, res) => {
     console.error("Enquiry email error:", error);
     return res.status(500).json({ error: "Could not send the enquiry." });
   }
-};
+}

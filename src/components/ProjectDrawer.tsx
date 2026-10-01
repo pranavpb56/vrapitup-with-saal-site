@@ -211,8 +211,38 @@ export function ProjectDrawer() {
     if (services.length === 0) errs.services = "Pick at least one";
     setErrors(errs);
     if (Object.values(errs).some(Boolean)) return;
+
     setStatus("sending");
-    window.setTimeout(() => setStatus("sent"), 1400);
+
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          company: form.company,
+          message: form.message,
+          services,
+          budget,
+          timeline,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data?.error || "Could not send enquiry");
+      }
+
+      setStatus("sent");
+    } catch (error) {
+      console.error("Enquiry submission failed:", error);
+      setErrors({
+        submit: "Something went wrong. Please try again or email us directly.",
+      });
+      setStatus("idle");
+    }
   };
 
   const toggleMulti = (v: string) => {
